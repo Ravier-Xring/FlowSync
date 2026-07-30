@@ -1,0 +1,6 @@
+1. MySQL执行 demo/database/flowsync_simple.sql
+2. 后端：进入 demo，运行 .\mvnw.cmd spring-boot:run
+3. 前端：在根目录运行 npm install，然后 npm run serve
+4. 前端：http://localhost:8081
+5. Swagger：http://localhost:8080/swagger-ui/index.html
+6. 测试账号：leader/123456、member1/123456、member2/123456

@@ -1,0 +1,8 @@
+.page-shell{padding:4px 8px 24px}
+.toolbar-card,.content-card{background:#fff;border:1px solid #e8eef7;border-radius:14px;box-shadow:0 14px 35px rgba(30,55,90,.05)}
+.toolbar-card{min-height:92px;padding:20px 24px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+.toolbar-card h2{margin:0 0 7px;font-size:21px;color:#102a43}.toolbar-card p{margin:0;color:#6b778c;font-size:14px}
+.toolbar-actions{display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:10px}
+.content-card{margin-top:20px;padding:24px}.el-table{--el-table-header-bg-color:#f8fafd}
+.table-pagination{margin-top:18px;justify-content:flex-end}
+@media(max-width:1050px){.toolbar-card{align-items:flex-start;flex-direction:column}.toolbar-actions{justify-content:flex-start}}

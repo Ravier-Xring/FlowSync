@@ -1,0 +1,27 @@
+# Dependencies
+node_modules/
+
+# Frontend build output
+dist/
+
+# Backend build output
+demo/
+demo/target/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Local environment and IDE files
+.env
+.env.*
+.vscode/
+.idea/
+git仓库说明.docx
+~$*.docx
+
+# OS files
+.DS_Store
+Thumbs.db

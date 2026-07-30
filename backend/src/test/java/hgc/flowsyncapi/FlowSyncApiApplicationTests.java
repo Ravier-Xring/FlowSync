@@ -1,0 +1,1 @@
+package hgc.flowsyncapi;import org.junit.jupiter.api.Test;class FlowSyncApiApplicationTests{@Test void structure(){}}

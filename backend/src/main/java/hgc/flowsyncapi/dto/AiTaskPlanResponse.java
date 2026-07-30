@@ -1,0 +1,1 @@
+package hgc.flowsyncapi.dto;import java.util.*;public class AiTaskPlanResponse{private String summary;private List<AiTaskPlanItem>items=new ArrayList<>();public String getSummary(){return summary;}public void setSummary(String v){summary=v;}public List<AiTaskPlanItem>getItems(){return items;}public void setItems(List<AiTaskPlanItem>v){items=v;}}
