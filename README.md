@@ -6,9 +6,7 @@
 
 ![Vue](https://img.shields.io/badge/Vue-3.x-4FC08D?logo=vue.js&logoColor=white)
 ![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.3.5-6DB33F?logo=springboot&logoColor=white)
-![Java](https://img.shields.io/badge/Java-17-ED8B00?logo=openjdk&logoColor=white)
 ![MySQL](https://img.shields.io/badge/MySQL-8.x-4479A1?logo=mysql&logoColor=white)
-![Qwen](https://img.shields.io/badge/AI-千问_Plus-FF6A00?logo=alibabacloud&logoColor=white)
 
 </div>
 
@@ -16,57 +14,47 @@
 
 ## 系统架构
 
-```mermaid
-graph TB
-    Browser["🖥 浏览器 :8081<br/>Vue 3 + Element Plus<br/>13 个视图 · 路由守卫 · Vuex"] -->|"REST JSON"| API
-
-    subgraph Backend["Spring Boot :8080"]
-        API["Controller<br/>REST API 接口"] --> Svc["Service<br/>业务逻辑层"]
-        Svc --> Mapper["Mapper<br/>MyBatis-Plus"]
-        Auth["JWT 拦截器<br/>认证 · 鉴权"]
-    end
-
-    Mapper --> DB[("MySQL 8.x<br/>flowsync_simple<br/>6 张核心表")]
-    Svc -.->|"AI 调用"| Qwen["阿里云千问<br/>qwen-plus<br/>智能任务拆解"]
-    Auth -.-> Browser
-
-    style Browser fill:#e3f2fd,stroke:#1976d2,color:#0d47a1
-    style API fill:#e8f5e9,stroke:#4caf50,color:#1b5e20
-    style Svc fill:#e8f5e9,stroke:#4caf50,color:#1b5e20
-    style Mapper fill:#e8f5e9,stroke:#4caf50,color:#1b5e20
-    style Auth fill:#fff3e0,stroke:#f57c00,color:#e65100
-    style DB fill:#f3e5f5,stroke:#7b1fa2,color:#4a148c
-    style Qwen fill:#fce4ec,stroke:#c2185b,color:#880e4f
-    style Backend fill:#fafafa,stroke:#e0e0e0,color:#333
 ```
-
-## 用户工作流
-
-```mermaid
-graph LR
-    A[创建项目] --> B[AI 任务拆解]
-    B --> C[分配执行]
-    C --> D[进度追踪]
-    D --> E[项目总结]
-
-    C -..-> F[AI 建议]
-    A -..-> G[(操作日志)]
-    C -..-> G
-    D -..-> G
-    E -..-> G
-
-    style A fill:#e3f2fd,stroke:#1976d2,color:#0d47a1
-    style B fill:#f3e5f5,stroke:#7b1fa2,color:#4a148c
-    style C fill:#e8f5e9,stroke:#4caf50,color:#1b5e20
-    style D fill:#fff3e0,stroke:#f57c00,color:#e65100
-    style E fill:#e0f2f1,stroke:#00897b,color:#004d40
-    style F fill:#fce4ec,stroke:#c2185b,color:#880e4f
-    style G fill:#eceff1,stroke:#78909c,color:#37474f
+ ┌────────────────────────────────────────────────────────────┐
+ │                    🖥  Vue 3 前端  :8081                    │
+ │         Element Plus · Vue Router · Vuex · Axios            │
+ └────────────────────────────┬───────────────────────────────┘
+                              │ REST API (JSON)
+                              ▼
+ ┌────────────────────────────────────────────────────────────┐
+ │              ⚙️  Spring Boot 后端  :8080                    │
+ │                                                            │
+ │   Controller ──→ Service ──→ Mapper ──→ MySQL             │
+ │     REST         业务逻辑     MyBatis     8.x               │
+ │     API                      Plus                          │
+ │                                                            │
+ │   🔒 JWT 拦截器：认证 + 鉴权                               │
+ └────────────────────────────┬───────────────────────────────┘
+                              │
+                              │ AI 调用
+                              ▼
+ ┌────────────────────────────────────────────────────────────┐
+ │              🤖 阿里云千问  qwen-plus                       │
+ │              智能任务拆解 · AI 建议生成                      │
+ └────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## 功能模块
+## 用户工作流
+
+```
+  创建项目 ──→ AI 任务拆解 ──→ 分配执行 ──→ 进度追踪 ──→ 项目总结
+                                                  │
+                                           ┌──────┴──────┐
+                                           │  操作日志    │
+                                           │  全程记录    │
+                                           └─────────────┘
+```
+
+---
+
+## 功能
 
 | 模块 | 说明 |
 |------|------|
@@ -96,13 +84,13 @@ graph LR
 
 ## 快速开始
 
-### 1. 初始化数据库
+**1. 初始化数据库**
 
 ```sql
 source backend/database/flowsync_simple.sql;
 ```
 
-### 2. 启动后端
+**2. 启动后端**
 
 ```bash
 cd backend
@@ -110,7 +98,7 @@ cd backend
 # Swagger: http://localhost:8080/swagger-ui/index.html
 ```
 
-### 3. 启动前端
+**3. 启动前端**
 
 ```bash
 cd frontend
@@ -118,7 +106,7 @@ npm install && npm run serve
 # 访问: http://localhost:8081
 ```
 
-### 4. 测试账号
+**4. 测试账号**
 
 | 角色 | 账号 | 密码 |
 |------|------|------|
@@ -126,7 +114,7 @@ npm install && npm run serve
 | 成员 | `member1` | `123456` |
 | 成员 | `member2` | `123456` |
 
-### 5. AI 配置（可选）
+**5. AI 配置（可选）**
 
 ```powershell
 $env:DASHSCOPE_API_KEY="sk-your-api-key"
@@ -180,12 +168,10 @@ FlowSync/
 
 ## 协作者
 
-<table>
-<tr>
-<td align="center"><b>Ravier-Xring</b><br/>全栈开发 · 50%</td>
-<td align="center"><b>Kayblis576</b><br/>全栈开发 · 50%</td>
-</tr>
-</table>
+| 成员 | 贡献 |
+|------|------|
+| [@Ravier-Xring](https://github.com/Ravier-Xring) | 全栈开发 · 50% |
+| [@Kayblis576](https://github.com/Kayblis576) | 全栈开发 · 50% |
 
 ---
 
