@@ -14,42 +14,37 @@
 
 ## 系统架构
 
-```
- ┌────────────────────────────────────────────────────────────┐
- │                    🖥  Vue 3 前端  :8081                    │
- │         Element Plus · Vue Router · Vuex · Axios            │
- └────────────────────────────┬───────────────────────────────┘
-                              │ REST API (JSON)
-                              ▼
- ┌────────────────────────────────────────────────────────────┐
- │              ⚙️  Spring Boot 后端  :8080                    │
- │                                                            │
- │   Controller ──→ Service ──→ Mapper ──→ MySQL             │
- │     REST         业务逻辑     MyBatis     8.x               │
- │     API                      Plus                          │
- │                                                            │
- │   🔒 JWT 拦截器：认证 + 鉴权                               │
- └────────────────────────────┬───────────────────────────────┘
-                              │
-                              │ AI 调用
-                              ▼
- ┌────────────────────────────────────────────────────────────┐
- │              🤖 阿里云千问  qwen-plus                       │
- │              智能任务拆解 · AI 建议生成                      │
- └────────────────────────────────────────────────────────────┘
-```
+```mermaid
+graph TB
+    Browser["fa:fa-desktop Vue 3 前端<br/>Element Plus · :8081"]
 
----
+    subgraph Backend["fa:fa-server Spring Boot :8080"]
+        direction LR
+        C["Controller"] --> S["Service"] --> M["Mapper"]
+        Auth["fa:fa-lock JWT 拦截器"]
+    end
+
+    DB[("fa:fa-database MySQL<br/>flowsync_simple")]
+    Q["fa:fa-robot 阿里云千问<br/>qwen-plus"]
+
+    Browser -->|"REST JSON"| C
+    M --> DB
+    S -.->|"AI 调用"| Q
+```
 
 ## 用户工作流
 
-```
-  创建项目 ──→ AI 任务拆解 ──→ 分配执行 ──→ 进度追踪 ──→ 项目总结
-                                                  │
-                                           ┌──────┴──────┐
-                                           │  操作日志    │
-                                           │  全程记录    │
-                                           └─────────────┘
+```mermaid
+graph LR
+    A["fa:fa-plus-circle 创建项目"] --> B["fa:fa-robot AI 拆解"]
+    B --> C["fa:fa-tasks 分配执行"]
+    C --> D["fa:fa-chart-line 进度追踪"]
+    D --> E["fa:fa-check-circle 项目总结"]
+
+    A -..-> F[("fa:fa-clipboard 操作日志")]
+    C -..-> F
+    D -..-> F
+    E -..-> F
 ```
 
 ---
@@ -119,8 +114,6 @@ npm install && npm run serve
 ```powershell
 $env:DASHSCOPE_API_KEY="sk-your-api-key"
 ```
-
-> 未配置时 AI 接口自动返回教学兜底结果，其他模块不受影响。
 
 ---
 
